@@ -8,7 +8,7 @@ from logdecorator import log_on_end
 
 @log_on_end(logging.INFO, "EMAIL sent to {email!s}")
 def send_email(email: str, data: dict) -> None:
-    """Mock."""
+    """Mock function imitates email delay."""
     sleep(0.1)
     print(f"EMAIL sent to {email}. Data: {data}")
 
@@ -21,7 +21,7 @@ def send_email(email: str, data: dict) -> None:
     logger=logging.getLogger(),
 )
 def send_post(url: str, data: dict) -> None:
-    """Mock function imitates unstable connection with Backoff handling."""
+    """Mock function imitates unstable connection with exception handling, logging and Backoff."""  # noqa E501
     sleep(0.1)
     if getrandbits(1):
         raise ConnectionError("Connection failed")
@@ -30,6 +30,6 @@ def send_post(url: str, data: dict) -> None:
 
 @log_on_end(logging.INFO, "SMS sent to {phone!s}")
 def send_sms(phone: str, data: dict) -> None:
-    """Mock."""
+    """Mock function imitates sms-service connection delay."""
     sleep(0.1)
     print(f"SMS sent to {phone}. Data: {data}")
