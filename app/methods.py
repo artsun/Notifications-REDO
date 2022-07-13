@@ -2,9 +2,8 @@ from random import getrandbits
 from time import sleep
 
 import backoff
-from logdecorator import log_on_end
-
 from config import logging
+from logdecorator import log_on_end
 
 
 @log_on_end(logging.INFO, "EMAIL sent to {email!s}")
@@ -22,7 +21,7 @@ def send_email(email: str, data: dict) -> None:
     logger=logging.getLogger(),
 )
 def send_post(url: str, data: dict) -> None:
-    """Mock function imitates unstable connection."""
+    """Mock function imitates unstable connection with Backoff handling."""
     sleep(0.1)
     if getrandbits(1):
         raise ConnectionError("Connection failed")

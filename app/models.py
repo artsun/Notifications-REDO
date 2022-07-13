@@ -1,13 +1,12 @@
 import re
 from typing import Literal, Optional
 
-from pydantic import AnyHttpUrl, BaseModel, EmailStr, validator
-
 from methods import send_email, send_post, send_sms
+from pydantic import AnyHttpUrl, BaseModel, EmailStr, validator
 
 
 class NotificationModel(BaseModel):
-    """Name and Type should be valid."""
+    """Basic notification object. Name and Type should be valid."""
 
     name: str
     email: Optional[EmailStr]
@@ -20,7 +19,7 @@ class NotificationModel(BaseModel):
 
     @validator("name")
     def name_validation(cls, value: str):
-        """"""
+        """Empty str is not allowed."""
 
         if not value:
             raise ValueError("Name is Empty.")

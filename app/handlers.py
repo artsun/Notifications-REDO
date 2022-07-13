@@ -3,11 +3,10 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, ClassVar, Optional
 
-from logdecorator import log_on_error
-from pydantic import ValidationError
-
 from config import logging
+from logdecorator import log_on_error
 from models import NotificationModel
+from pydantic import ValidationError
 
 
 class AbstractHandler(ABC):
@@ -30,6 +29,8 @@ class AbstractHandler(ABC):
 
 
 class NotificationHandler(AbstractHandler):
+    """Use models to validate the notification object."""
+
     def __init__(self, model):
         self.model: ClassVar[NotificationModel] = model
 
@@ -43,6 +44,7 @@ class NotificationHandler(AbstractHandler):
         return self.model(**notification)
 
     def handle(self, notification: dict) -> Optional[NotificationModel]:
+        """Get Notification model instance or go to next handler."""
 
         try:
             return self._get_instance(notification)
