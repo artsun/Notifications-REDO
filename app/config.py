@@ -1,8 +1,15 @@
+import logging
 from typing import Optional
 
 from pydantic import BaseModel, ValidationError
 
-from logger import logging
+logging.basicConfig(
+    filename="../conf-logs-volume/redo.log",
+    encoding="utf-8",
+    level=logging.INFO,
+    format="%(asctime)s:%(levelname)s:%(message)s",
+    datefmt="%d.%m.%Y %H:%M:%S",
+)
 
 
 class Config(BaseModel):

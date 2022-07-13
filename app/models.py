@@ -7,7 +7,7 @@ from methods import send_email, send_post, send_sms
 
 
 class NotificationModel(BaseModel):
-    """If Name and Notification is valid"""
+    """Name and Type should be valid."""
 
     name: str
     email: Optional[EmailStr]
@@ -36,9 +36,9 @@ class SMSNotificationModel(NotificationModel):
 
     @validator("phone")
     def phone_validation(cls, value: str):
-        """Check if phone number contains letters."""
+        """Check if phone number contains capital letters."""
 
-        regex = r"[a-zA-Z]"
+        regex = r"[A-Z]"
         if value and re.search(regex, value):
             raise ValueError("Phone Number is Invalid.")
 
