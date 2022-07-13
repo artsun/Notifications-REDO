@@ -71,7 +71,7 @@ def execute(config: Config):
 
 
 if __name__ == "__main__":
-    conf = get_conf("../conf-logs-volume/config.json")
+    conf = get_conf()
 
     if conf is None:
         raise SystemExit("Invalid config.")
